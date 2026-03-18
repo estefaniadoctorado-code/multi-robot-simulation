@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="world" default="clear_office" />
+
+  <group ns="robot0">
+    <param name="filename" value="$(find planning_worlds)/worlds/maps/experiment1/R1_MPP.txt"/>
+    <param name="robotid" value="0"/>
+    <param name="metricpath" value="True"/>
+    <node name="robot0_path_viewer" pkg="multiple_robot_navigation" type="path_publisher.py" >
+    </node>
+  </group>
+
+
+  <group ns="robot1">
+    <param name="filename" value="$(find planning_worlds)/worlds/maps/experiment1/R2_MPP.txt"/>
+    <param name="robotid" value="1"/>
+    <param name="metricpath" value="True"/>
+    <node name="robot1_path_viewer" pkg="multiple_robot_navigation" type="path_publisher.py">
+    </node>
+  </group>
+
+
+  <group ns="robot2">
+    <param name="filename" value="$(find planning_worlds)/worlds/maps/experiment1/R3_MPP.txt"/>
+    <param name="robotid" value="2"/>
+    <param name="metricpath" value="True"/>
+    <node name="robot2_path_viewer" pkg="multiple_robot_navigation" type="path_publisher.py" >
+    </node>
+  </group>
+
+ <group ns="robot3">
+    <param name="filename" value="$(find planning_worlds)/worlds/maps/experiment1/R4_MPP.txt"/>
+    <param name="robotid" value="3"/>
+    <param name="metricpath" value="True"/>
+    <node name="robot3_path_viewer" pkg="multiple_robot_navigation" type="path_publisher.py" >
+    </node>
+  </group>
+
+</launch>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="base_frame"  default="link_chassis"/>
+  <arg name="namespace0" default="robot0_tf/robot0"/>
+  <arg name="namespace1" default="robot1_tf/robot1"/>
+  <arg name="namespace2" default="robot2_tf/robot2"/>
+  <arg name="namespace3" default="robot3_tf/robot3"/>
+  <arg name="namespace4" default="robot4_tf/robot4"/>
+  <arg name="namespace5" default="robot5_tf/robot5"/>
+  <arg name="tfpre0"  default="$(arg namespace0)"/>
+  <arg name="tfpre1"  default="$(arg namespace1)"/>
+  <arg name="tfpre2"  default="$(arg namespace2)"/>
+  <arg name="tfpre3"  default="$(arg namespace3)"/>
+  <arg name="tfpre4"  default="$(arg namespace4)"/>
+  <arg name="tfpre5"  default="$(arg namespace5)"/>
+
+  <param name="robot0_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace0)
+    tfpre:=$(arg tfpre0)
+    " />
+
+  <param name="robot1_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace1)
+    tfpre:=$(arg tfpre1)
+    " />
+
+  <param name="robot2_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace2)
+    tfpre:=$(arg tfpre2)
+    " />
+
+  <param name="robot3_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace3)
+    tfpre:=$(arg tfpre3)
+    " />
+  
+  <param name="robot4_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace4)
+    tfpre:=$(arg tfpre4)
+    " />
+  <param name="robot5_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace5)
+    tfpre:=$(arg tfpre5)
+    " />
+
+  <!-- Launch rviz with config file -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find multiple_robot_navigation)/rviz_config/nav_config.rviz"> </node>
+
+</launch>

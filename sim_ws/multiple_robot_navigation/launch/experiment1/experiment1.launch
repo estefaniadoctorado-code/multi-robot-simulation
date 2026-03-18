@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="/use_sim_time" value="true" />
+  <arg name="world" default="boxes6" />
+  <arg name="type" default="nav" />
+  <arg name="yaw" default="0.0" />
+
+  <!-- start world -->
+  <node name="gazebo" pkg="gazebo_ros" type="gazebo" 
+    args="$(find planning_worlds)/worlds/$(arg world).world" respawn="false" output="screen" />
+
+  <!-- launch all robots -->
+  <include file="$(find multiple_robot_navigation)/launch/experiment1/experiment1_$(arg type).launch">
+    <arg name="world" value="$(arg world)" />
+    <arg name="yaw" value="$(arg yaw)" />
+  </include>
+
+</launch>
+

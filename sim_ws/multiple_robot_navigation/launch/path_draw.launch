@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="world" default="clear_office" />
+
+  <!-- Map publisher node -->
+  <group ns="robot1">
+    <param name="filename" value="$(find multiple_robot_navigation)/config/robots_path_boxes5/map_boxes5_merged_robots1.txt"/>
+    <param name="robotid" value="1"/>
+    <param name="metricpath" value="True"/>
+    <node name="robot1_path_viewer" pkg="multiple_robot_navigation" type="path_publisher.py">
+    </node>
+  </group>
+
+
+  <group ns="robot2">
+    <param name="filename" value="$(find multiple_robot_navigation)/config/robots_path_boxes5/map_boxes5_merged_robots2.txt"/>
+    <param name="robotid" value="2"/>
+    <param name="metricpath" value="True"/>
+    <node name="robot2_path_viewer" pkg="multiple_robot_navigation" type="path_publisher.py" >
+    </node>
+  </group>
+
+</launch>

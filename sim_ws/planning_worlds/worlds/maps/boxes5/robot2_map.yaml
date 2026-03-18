@@ -1,0 +1,10 @@
+image: ./robot2_map.pgm
+resolution: 0.050000
+origin: [-13.800000, -12.200000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+# position:
+# x: -3.2328205265
+# y: 13.6489957174
+# z: 0.0999866295273

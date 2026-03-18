@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<launch>
+    <!--Este es el nombre del robot y el namespace del mismo-->
+    <arg name="namespace"/>
+    <arg name="init_pose"/>
+    <arg name="scan_topic"  default="laser_scan"/>
+    <arg name="sensor_range" default="1.0"/>
+
+    <!-- Generate the tf_prefix from the namespace -->
+    <arg name="tfpre" default="$(arg namespace)_tf" />
+
+    <!-- Put value on the parameter server in the group's namespace -->
+    <param name="tf_prefix" value="$(arg namespace)_tf" />
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+      nsp:=$(arg namespace)
+      tfpre:=$(arg tfpre)
+    " />
+
+    <node name="spawn_minibot_model" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model $(arg namespace) $(arg init_pose)"
+          respawn="false"/>
+
+    <!-- The odometry estimator, throttling, fake laser etc. go here -->
+  <node name="joint_state_publisher_$(arg namespace)" pkg="joint_state_publisher" type="joint_state_publisher">
+  <param name="use_gui" value="False"/>
+  </node>
+
+  <node name="robot_state_publisher_$(arg namespace)" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <!-- All the stuff as from usual robot launch file -->
+
+  <node pkg="fake_localization" type="fake_localization" name="fake_localization" output="screen">
+    <remap from="base_pose_ground_truth" to="$(arg namespace)/odom"/>
+    <param name="odom_frame_id" value="/$(arg namespace)_tf/odom"/>
+
+    <param name="base_frame_id" value="/$(arg namespace)_tf/$(arg namespace)_link_chassis"/>
+    <param name="global_frame_id" value="/map"/>
+
+  </node>
+
+  <node pkg="move_base" type="move_base" respawn="false" name="$(arg namespace)_move_base" output="screen">
+    <param name="base_global_planner" value="global_planner/GlobalPlanner" />
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />
+    <rosparam file="$(find multiple_robot_navigation)/config/generated/boxes3/$(arg namespace)_costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find multiple_robot_navigation)/config/generated/boxes3/$(arg namespace)_costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find multiple_robot_navigation)/config/generated/boxes3/$(arg namespace)_local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find multiple_robot_navigation)/config/generated/boxes3/$(arg namespace)_global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find multiple_robot_navigation)/config/generated/boxes3/$(arg namespace)_base_local_planner_params.yaml" command="load" />
+    
+    <remap from="odom" to="$(arg namespace)/odom"/>
+    <remap from="cmd_vel" to="$(arg namespace)/cmd_vel"/>
+    <remap from="map" to="/map"/>
+ </node>
+
+ <node pkg="tf" type="static_transform_publisher" name="odom_$(arg namespace)_2_map" args="0 0 0 0 0 0 /map /$(arg namespace)_tf/odom 100"/>
+
+</launch>
+
+

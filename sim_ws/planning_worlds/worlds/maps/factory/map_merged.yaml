@@ -1,0 +1,19 @@
+image: map_merged.pgm
+resolution: 0.050000
+# posición final de los robots
+# x: 20.188791
+# y: -13.645900
+origin: [-32.200000, -26.600000, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+xoriginr1: -12.8955
+yoriginr1: 11.652
+xoriginr2: -14.6706751402
+yoriginr2: 13.8724920081
+xoriginr3: 18.1372238875
+yoriginr3: 13.1112342265
+xoriginr4: 2.82473338002
+yoriginr4: 3.03142039457
+xoriginr5: -12.5038516538
+yoriginr5: -2.46713499581

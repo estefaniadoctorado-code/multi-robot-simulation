@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="base_frame"  default="link_chassis"/>
+  <arg name="namespace0" default="robot0_tf/robot0"/>
+  <arg name="namespace1" default="robot1_tf/robot1"/>
+  <arg name="namespace2" default="robot2_tf/robot2"/>
+  <arg name="tfpre0"  default="$(arg namespace0)"/>
+  <arg name="tfpre1"  default="$(arg namespace1)"/>
+  <arg name="tfpre2"  default="$(arg namespace2)"/>
+  
+  <param name="robot0_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace0)
+    tfpre:=$(arg tfpre0)
+    " />
+
+  <param name="robot1_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace1)
+    tfpre:=$(arg tfpre1)
+    " />
+
+  <param name="robot2_description" command="$(find xacro)/xacro --inorder '$(find untamo_description)/urdf/untamo.xacro'
+    nsp:=$(arg namespace2)
+    tfpre:=$(arg tfpre2)
+    " />
+
+  <!-- Launch rviz with config file -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find multiple_robot_navigation)/rviz_config/nav_config_tree_robots.rviz"> </node>
+
+</launch>

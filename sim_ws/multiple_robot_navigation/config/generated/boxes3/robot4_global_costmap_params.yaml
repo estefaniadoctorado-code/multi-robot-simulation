@@ -1,0 +1,6 @@
+global_costmap:
+  global_frame: robot4_tf/odom
+  robot_base_frame: robot4_tf/robot4_link_chassis
+  update_frequency: 1.0
+  static_map: true
+

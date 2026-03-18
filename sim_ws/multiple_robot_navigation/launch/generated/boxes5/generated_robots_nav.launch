@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="world" default="boxes5" />
+
+<!-- BEGIN ROBOT 0 -->
+  <group ns="robot0">
+    <param name="tf_prefix" value="robot0_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/generated/boxes5/one_robot0_nav.launch" >
+    <arg name="init_pose" value="-x 7.75 -y 16.3 -z 0.0 -Y -45.0" />
+      <arg name="namespace"  value="robot0" />
+    </include>
+  </group>
+
+<!-- BEGIN ROBOT 1 -->
+  <group ns="robot1">
+    <param name="tf_prefix" value="robot1_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/generated/boxes5/one_robot1_nav.launch" >
+    <arg name="init_pose" value="-x -3.25 -y 13.6 -z 0.0 -Y -73.4742036101" />
+      <arg name="namespace"  value="robot1" />
+    </include>
+  </group>
+
+<!-- BEGIN ROBOT 2 -->
+  <group ns="robot2">
+    <param name="tf_prefix" value="robot2_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/generated/boxes5/one_robot2_nav.launch" >
+    <arg name="init_pose" value="-x 9.5 -y 4.45 -z 0.0 -Y 0.0" />
+      <arg name="namespace"  value="robot2" />
+    </include>
+  </group>
+
+<!-- BEGIN ROBOT 3 -->
+  <group ns="robot3">
+    <param name="tf_prefix" value="robot3_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/generated/boxes5/one_robot3_nav.launch" >
+    <arg name="init_pose" value="-x 7.5 -y 7.26 -z 0.0 -Y 0.0" />
+      <arg name="namespace"  value="robot3" />
+    </include>
+  </group>
+
+<!-- Map publisher node -->
+  <node name="map_publisher" pkg="map_server" type="map_server"
+    args="$(find planning_worlds)/worlds/map_$(arg world).yaml" output="screen" />
+
+</launch>

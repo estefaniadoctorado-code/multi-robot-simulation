@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="world" default="boxes6" />
+  <arg name="yaw" default="-0.78" />
+
+<!-- BEGIN ROBOT 0 --> 
+  <group ns="robot0">
+    <param name="tf_prefix" value="robot0_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/experiment1/one_robot0_nav.launch" >
+    <!--<arg name="init_pose" value="-x -9 -y  9  -z 0.0 -Y 0.0" />-->
+    <!--<arg name="init_pose" value="-x -9.0 -y 1.5  -z 0.0 -Y 1.578" />-->
+    <!--<arg name="init_pose" value="-x 9.0 -y 11  -z 0.0 -Y 3.14" />-->
+    <arg name="init_pose" value="-x -8.0 -y 18  -z 0.0 -Y -1.578" />
+    <!--<arg name="init_pose" value="-x -8.0 -y 17.6  -z 0.0 -Y $(arg yaw)" />-->
+      <arg name="namespace"  value="robot0" />
+    </include>
+  </group> 
+
+<!-- BEGIN ROBOT 1 -->
+  <group ns="robot1">
+    <param name="tf_prefix" value="robot1_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/experiment1/one_robot1_nav.launch" >
+    <!--<arg name="init_pose" value="-x 9 -y  9  -z 0.0 -Y 3.14" />-->
+      <!--<arg name="init_pose" value="-x  9 -y  1.5 -z 0.0 -Y 1.578" />-->
+    <arg name="init_pose" value="-x  -2.45 -y  18 -z 0.0 -Y -1.578" />
+      <arg name="namespace"  value="robot1" />
+    </include>
+  </group>
+
+
+<!-- BEGIN ROBOT 2 -->
+  <group ns="robot2">
+    <param name="tf_prefix" value="robot2_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/experiment1/one_robot2_nav.launch" >
+    <!--<arg name="init_pose" value="-x -9 -y  9  -z 0.0 -Y 0.0" />-->
+    <!--|+<arg name="init_pose" value="-x 9 -y  9  -z 0.0 -Y 3.14" />+|-->
+    <arg name="init_pose" value="-x 2.45 -y  18  -z 0.0 -Y -1.578" />
+      <arg name="namespace"  value="robot2" />
+    </include>
+  </group>
+
+<!-- BEGIN ROBOT 3 --> 
+  <group ns="robot3">
+    <param name="tf_prefix" value="robot3_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/experiment1/one_robot3_nav.launch" >
+    <!--<arg name="init_pose" value="-x 9 -y  9  -z 0.0 -Y 3.14" />-->
+    <!--|+<arg name="init_pose" value="-x -9 -y  9  -z 0.0 -Y 0.0" />+|-->
+    <arg name="init_pose" value="-x 8.54 -y  18  -z -0.0 -Y -1.578" />
+      <arg name="namespace"  value="robot3" />
+    </include>
+  </group> 
+
+  <!-- BEGIN ROBOT 4-->  
+  <group ns="robot4">
+    <param name="tf_prefix" value="robot4_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/experiment1/one_robot4_nav.launch" >
+    <!--<arg name="init_pose" value="-x -2.5 -y 19 -z -1.54 -Y $(arg yaw)" />-->
+    <arg name="init_pose" value="-x 8.5 -y 1 -z 0.0 -Y 3.14" />
+    <arg name="namespace"  value="robot4" />
+    </include>
+  </group>
+
+  <!-- BEGIN ROBOT 5-->  
+  <group ns="robot5">
+    <param name="tf_prefix" value="robot5_tf" />
+    <include file="$(find multiple_robot_navigation)/launch/experiment1/one_robot5_nav.launch" >
+    <!--<arg name="init_pose" value="-x -2.5 -y 19 -z -1.54 -Y $(arg yaw)" />-->
+    <arg name="init_pose" value="-x -8.5 -y 1 -z 0.0 -Y 3.14" />
+    <arg name="namespace"  value="robot5" />
+    </include>
+  </group>
+<!-- Map publisher node -->
+  <node name="map_publisher" pkg="map_server" type="map_server"
+    args="$(find planning_worlds)/worlds/map_$(arg world).yaml" output="screen" />
+
+</launch>
+

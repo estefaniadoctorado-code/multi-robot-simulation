@@ -1,0 +1,17 @@
+image: ./map_merged.pgm
+resolution: 0.050000
+origin: [-15.05, -10.22, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+xoriginr1: -8.0
+yoriginr1: 17.6 
+xoriginr2: -2.45
+yoriginr2: 17.6 
+xoriginr3: 2.45
+yoriginr3: 17.6 
+xoriginr4: 8
+yoriginr4: 17.6 
+
+
+
